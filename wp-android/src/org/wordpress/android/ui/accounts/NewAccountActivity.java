@@ -42,6 +42,11 @@ public class NewAccountActivity extends Activity {
                 startActivityForResult(i, EXISTING_ORG_ACCOUNT_REQUEST);
             }
         });
+        
+        Intent i = new Intent(NewAccountActivity.this, AccountSetupActivity.class);
+        startActivityForResult(i, EXISTING_ORG_ACCOUNT_REQUEST);
+        
+        
     }
 
     @Override

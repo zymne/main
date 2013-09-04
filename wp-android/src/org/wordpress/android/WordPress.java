@@ -77,17 +77,9 @@ public class WordPress extends Application {
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         // Use a small slice of available memory for the image cache
         int cacheSize = maxMemory / 32;
-        
-        try
-        {
-            org.wordpress.android.util.BitmapLruCache cache = new org.wordpress.android.util.BitmapLruCache(cacheSize);
-            imageLoader = new  ImageLoader(requestQueue, cache);
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }                        
-        
+                           
+        imageLoader = new  ImageLoader(requestQueue, new BitmapLruCache(cacheSize));
+                                        
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);  
         if (settings.getInt("wp_pref_last_activity", -1) >= 0)
             shouldRestoreSelectedActivity = true;

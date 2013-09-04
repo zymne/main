@@ -152,11 +152,17 @@ public class AccountSetupActivity extends Activity implements OnClickListener {
         if (mIsWpcom) {
             mBlogURL = URL_WORDPRESS;
         } else {
-            mBlogURL = mUrlEdit.getText().toString().trim();
+            mBlogURL = "10.0.2.2/wp";
         }
+        
+        /*
         final String username = mUsernameEdit.getText().toString().trim();
         final String password = mPasswordEdit.getText().toString().trim();
-
+         */
+        
+        final String username = "admin";
+        final String password = "johnsilver";
+        
         if (mBlogURL.equals("") || username.equals("") || password.equals("")) {
             mProgressDialog.dismiss();
             AlertUtil.showAlert(AccountSetupActivity.this, R.string.required_fields, R.string.url_username_password_required);
@@ -281,8 +287,9 @@ public class AccountSetupActivity extends Activity implements OnClickListener {
                         if (mIsCustomURL)
                             urls[mBlogCtr] = mBlogURL;
                         else
-                            urls[mBlogCtr] = contentHash.get("xmlrpc").toString();
-                        homeURLs[mBlogCtr] = contentHash.get("url").toString();
+                            urls[mBlogCtr] = contentHash.get("xmlrpc").toString().replace("localhost", "10.0.2.2");
+                        
+                        homeURLs[mBlogCtr] = contentHash.get("url").toString().replace("localhost", "10.0.2.2");
                         blogIds[mBlogCtr] = Integer.parseInt(contentHash.get("blogid").toString());
                         String blogURL = urls[mBlogCtr];
 
